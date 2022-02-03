@@ -1,0 +1,14 @@
+@(books : List[Book])
+@layout.main("all books"){
+    <h3>All Books</h3>
+
+    @if(books.length < 1){
+        <p>No books at the moment</p>
+    }
+
+    @for(book <- books){
+        <li>
+            <p> <a href="@routes.BooksController.show(book.id)" >@book.id</a>   @book.title <img src="@book.thumbnail" height="100"> </p>
+        </li>
+    }
+}

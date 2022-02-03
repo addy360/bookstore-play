@@ -1,0 +1,15 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        @layout.header(title)
+    </head>
+    <body>
+        @layout.nav()
+        @content
+
+        @layout.footer()
+    </body>
+</html>
+

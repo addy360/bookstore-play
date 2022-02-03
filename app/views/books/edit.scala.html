@@ -1,0 +1,10 @@
+@(book:Book)
+@layout.main("edit book"){
+    <h3>Edit Book</h3>
+
+    <form method="post" action="@routes.BooksController.update(book.id)">
+        <input type="text" name="title" placeholder="book title" value="@book.title" />
+        <input type="text" name="thumbnail" placeholder="thumbnail url" value="@book.thumbnail"/>
+        <button type="submit" >update</button>
+    </form>
+}

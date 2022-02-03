@@ -1,0 +1,12 @@
+@(book : Book)
+@layout.main("Show book"){
+    <h3>Book details</h3>
+
+    <p>@book.id</p>
+    <p>@book.title</p>
+    <p> <img src="@book.thumbnail" height="300" /></p>
+
+    <a href="@routes.BooksController.edit(book.id)">Edit</a>
+
+    <a href="@routes.BooksController.delete(book.id)" >Delete</a>
+}
