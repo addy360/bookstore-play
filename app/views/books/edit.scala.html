@@ -1,10 +1,20 @@
 @(book:Book)
 @layout.main("edit book"){
-    <h3>Edit Book</h3>
 
-    <form method="post" action="@routes.BooksController.update(book.id)">
-        <input type="text" name="title" placeholder="book title" value="@book.title" />
-        <input type="text" name="thumbnail" placeholder="thumbnail url" value="@book.thumbnail"/>
-        <button type="submit" >update</button>
-    </form>
+    <section class="py-5">
+        <h3 class="text-xl font-bold mb-4">Edit book</h3>
+        <form method="post" action="@routes.BooksController.update(book.id)" class="w-[50vw] mx-auto shadow p-10">
+            <div class="mb-4">
+                <label class="capitalize mb-2 block font-thin" >book title</label>
+                <input class="outline-none block w-full border rounded py-2 px-3 " type="text" name="title" value="@book.title" placeholder="book title" />
+            </div>
+
+            <div class="mb-4">
+                <label class="capitalize mb-2 block font-thin" >book image url</label>
+                <input class="outline-none block w-full border rounded py-2 px-3 " type="text" name="thumbnail" value="@book.thumbnail" placeholder="thumbnail url" />
+            </div>
+
+            <button type="submit" class="px-4 py-2 rounded border" >Save</button>
+        </form>
+    </section>
 }

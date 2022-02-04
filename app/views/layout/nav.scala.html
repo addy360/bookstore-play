@@ -1,15 +1,17 @@
 @()
 
-<nav>
-    <h4>Bookstore</h4>
 
-    <ul>
+
+<nav class="flex justify-between items-center px-4 py-2 shadow" >
+    <h4 class="font-bold text-5xl" >Bookstore</h4>
+
+    <ul class="flex items-center">
         <li>
-            <a href="@routes.BooksController.index.url">All books</a>
+            <a class="px-4 py-2 mx-2 rounded border" href="@routes.BooksController.index">All books</a>
         </li>
 
         <li>
-            <a href="@routes.BooksController.create.url">Create book</a>
+            <a class="px-4 py-2 mx-2 rounded border" href="@routes.BooksController.create">Create book</a>
         </li>
 
     </ul>

@@ -1,12 +1,25 @@
 @(formCreate: Form[Book])
 @import helper._
 @layout.main("create book"){
-    <h3>create book</h3>
-    <form method="post" action="/books">
-        <input type="text" name="title" placeholder="book title" />
-        <input type="text" name="thumbnail" placeholder="thumbnail url"/>
-        <button type="submit" >Save</button>
-    </form>
+
+    <section class="py-5">
+        <h3 class="text-xl font-bold mb-4">create book</h3>
+        <form method="post" action="@routes.BooksController.store" class="w-[50vw] mx-auto shadow p-10">
+            <div class="mb-4">
+                <label class="capitalize mb-2 block font-thin" >book title</label>
+                <input class="outline-none block w-full border rounded py-2 px-3 " type="text" name="title" placeholder="book title" />
+            </div>
+
+            <div class="mb-4">
+                <label class="capitalize mb-2 block font-thin" >book image url</label>
+                <input class="outline-none block w-full border rounded py-2 px-3 " type="text" name="thumbnail" placeholder="thumbnail url" />
+            </div>
+
+            <button type="submit" class="px-4 py-2 rounded border" >Save</button>
+        </form>
+    </section>
+
+
 
 
 }

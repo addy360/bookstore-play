@@ -20,6 +20,14 @@ public class BooksController extends Controller {
     public BooksController() {
         super();
         book = new Book();
+        book.thumbnail = "https://source.unsplash.com/random?cover";
+        book.title="book one";
+        book.save(book);
+
+        book.thumbnail = "https://source.unsplash.com/random?book";
+        book.title="book two";
+        book.save(book);
+
     }
 
     public Result index() {
