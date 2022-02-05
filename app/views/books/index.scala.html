@@ -1,13 +1,20 @@
-@(books : List[Book])
+@import play.mvc.Http.Request
+@(books : List[Book], request: Request)
+
 @layout.main("all books"){
+
+
+   @request2Flash(request).get("success")
 
     <section class="py-5">
         <h3 class="text-xl font-bold">All Books</h3>
 
         @if(books.length < 1){
-            <p class="py-2 text-center font-light ">No books at the moment</p>
+            <div class=" mt-4 bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
+                <p class="font-bold">Informational message</p>
+                <p class="text-sm">No books at the moment!</p>
+            </div>
         }
-
         @if(books.length > 0){
             <div class="container">
 

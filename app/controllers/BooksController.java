@@ -20,20 +20,12 @@ public class BooksController extends Controller {
     public BooksController() {
         super();
         book = new Book();
-        book.thumbnail = "https://source.unsplash.com/random?cover";
-        book.title="book one";
-        book.save(book);
-
-        book.thumbnail = "https://source.unsplash.com/random?book";
-        book.title="book two";
-        book.save(book);
-
     }
 
-    public Result index() {
+    public Result index(Http.Request request) {
         ArrayList<Book> books = this.book.find();
 
-        return ok(views.html.books.index.render(books));
+        return ok(views.html.books.index.render(books, request));
     }
 
     public Result show(Double bookId) {
@@ -50,7 +42,7 @@ public class BooksController extends Controller {
         Form<Book> form = formFactory.form(Book.class);
         Book b = form.bindFromRequest(request).get();
         book.save(b);
-        return redirect("/books");
+        return redirect("/books").flashing("success","Book has been added successfully!");
     }
 
     public Result edit(Double bookId) {
@@ -70,11 +62,11 @@ public class BooksController extends Controller {
         this.book.update(b);
 
         System.out.println(request.toString());
-        return redirect("/books");
+        return redirect("/books").flashing("success","Book has been updated successfully!");
     }
 
     public Result delete(Double bookId) {
         this.book.findByIdAndDelete(bookId);
-        return redirect("/books");
+        return redirect("/books").flashing("success","Book has been deleted successfully!");
     }
 }
