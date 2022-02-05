@@ -1,0 +1,8 @@
+@import play.mvc.Http.Request
+@(request: Request)
+
+@layout.main("all users"){
+    <a class="px-4 py-2 mx-2 rounded border inline-block my-4" href="@routes.UserController.create">create</a>
+    @request2Flash(request).get("success")
+    <h4>All users available in the system</h4>
+}
