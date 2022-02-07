@@ -1,8 +1,45 @@
 @import play.mvc.Http.Request
-@(request: Request)
+@import java.util
+@(request: Request, users : util.ArrayList[User])
 
 @layout.main("all users"){
     <a class="px-4 py-2 mx-2 rounded border inline-block my-4" href="@routes.UserController.create">create</a>
     @request2Flash(request).get("success")
     <h4>All users available in the system</h4>
+    @if(users.length < 1){
+        <div class=" mt-4 bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
+            <p class="font-bold">Informational message</p>
+            <p class="text-sm">No users at the moment!</p>
+        </div>
+    }else{
+        <div class="container">
+
+            <table class="text-left w-full">
+                <thead class="bg-black flex text-white w-full rounded shadow">
+                    <tr class="flex w-full mb-4">
+                        <th class="p-4 w-1/4">Index</th>
+                        <th class="p-4 w-1/4">fullname</th>
+                        <th class="p-4 w-1/4">username</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-grey-light flex flex-col items-center justify-between overflow-y-scroll w-full" style="height: 50vh;">
+
+
+                @for(user <- users){
+                    <tr class="flex w-full  border-b-2">
+                        <td class="p-4 w-[33%]">
+                            <a href="" >@user.id</a>
+                        </td>
+                        <td class="p-4 w-[33%]"> @user.fullname</td>
+                        <td class="p-4 w-[33%]">
+                            @user.username
+                        </td>
+                    </tr>
+                }
+
+                </tbody>
+            </table>
+        </div>
+
+    }
 }

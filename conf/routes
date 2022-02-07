@@ -7,9 +7,9 @@ GET     /                           controllers.HomeController.index()
 
 # BOOKS
 GET     /books                      controllers.BooksController.index(request:Request)
-GET     /books/create               controllers.BooksController.create
+GET     /books/create               controllers.BooksController.create(request : Request)
 GET     /books/:id                  controllers.BooksController.show(id:Double)
-GET     /books/:id/edit             controllers.BooksController.edit(id:Double)
+GET     /books/:id/edit             controllers.BooksController.edit(id:Double, request:Request)
 POST    /books                      controllers.BooksController.store(request:Request)
 POST    /books/:id/update           controllers.BooksController.update( id:Double,request:Request)
 GET     /books/:id/delete           controllers.BooksController.delete(id:Double)

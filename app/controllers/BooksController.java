@@ -33,9 +33,8 @@ public class BooksController extends Controller {
         return ok(views.html.books.show.render(b));
     }
 
-    public Result create(){
-        Form<Book> form = formFactory.form(Book.class);
-        return ok(views.html.books.create.render(form));
+    public Result create(Http.Request request){
+        return ok(views.html.books.create.render(request));
     }
 
     public Result store(Http.Request request) {
@@ -45,9 +44,9 @@ public class BooksController extends Controller {
         return redirect("/books").flashing("success","Book has been added successfully!");
     }
 
-    public Result edit(Double bookId) {
+    public Result edit(Double bookId, Http.Request request) {
         Book b = this.book.findById(bookId);
-        return ok(views.html.books.edit.render(b));
+        return ok(views.html.books.edit.render(b, request));
     }
 
     public Result update(Double bookId, Http.Request request) {
