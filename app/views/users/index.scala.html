@@ -28,7 +28,7 @@
                 @for(user <- users){
                     <tr class="flex w-full  border-b-2">
                         <td class="p-4 w-[33%]">
-                            <a href="" >@user.id</a>
+                            <a href="@routes.UserController.show(user.id)" >@user.id</a>
                         </td>
                         <td class="p-4 w-[33%]"> @user.fullname</td>
                         <td class="p-4 w-[33%]">

@@ -41,7 +41,7 @@ public class BooksController extends Controller {
         Form<Book> form = formFactory.form(Book.class);
         Book b = form.bindFromRequest(request).get();
         book.save(b);
-        return redirect("/books").flashing("success","Book has been added successfully!");
+        return redirect(routes.BooksController.index()).flashing("success","Book has been added successfully!");
     }
 
     public Result edit(Double bookId, Http.Request request) {

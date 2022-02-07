@@ -1,0 +1,27 @@
+@import views.html.helper.CSRF
+@import play.mvc.Http.RequestHeader
+@(user:User, requestHeader: RequestHeader)
+@layout.main("create user") {
+    <section class="py-5">
+        <h3 class="text-xl font-bold mb-4">create user</h3>
+        <form method="post" action="@routes.UserController.update(user.id)" class="w-[50vw] mx-auto shadow p-10">
+            @CSRF.formField(javaRequestHeader2ScalaRequestHeader(requestHeader))
+            <div class="mb-4">
+                <label class="capitalize mb-2 block font-thin" >fullname</label>
+                <input class="outline-none block w-full border rounded py-2 px-3 " value="@user.fullname" type="text" name="fullname" placeholder="fullname" />
+            </div>
+
+            <div class="mb-4">
+                <label class="capitalize mb-2 block font-thin" >username</label>
+                <input class="outline-none block w-full border rounded py-2 px-3 " value="@user.username" type="text" name="username" placeholder="username" />
+            </div>
+
+            <div class="mb-4">
+                <label class="capitalize mb-2 block font-thin" >password</label>
+                <input class="outline-none block w-full border rounded py-2 px-3 " type="password" name="password" placeholder="password" />
+            </div>
+
+            <button type="submit" class="px-4 py-2 rounded border" >Save</button>
+        </form>
+    </section>
+}

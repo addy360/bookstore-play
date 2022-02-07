@@ -1,12 +1,20 @@
 package models;
 
+import io.ebean.Model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.ArrayList;
 
 
-public class Book {
+@Entity
+public class Book extends Model {
+
+    @Id
     public double id;
     public String title;
     public String thumbnail;
+
 
     ArrayList<Book> books = new ArrayList<>();
 

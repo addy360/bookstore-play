@@ -1,0 +1,22 @@
+@(user : User)
+@layout.main("user details"){
+    <div class="p-5 shadow rounded">
+        <h3 class="text-3xl font-light mb james">User details</h3>
+        <div class="max-w-sm w-full lg:max-w-full lg:flex">
+            <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background: url('https://source.unsplash.com/random?user') center center/cover" title="@user.fullname">
+            </div>
+            <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                <div class="mb-8">
+                    <div class="text-gray-900 font-bold text-xl mb-2">@user.fullname</div>
+                    <p class="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="@routes.UserController.edit(user.id)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
+
+                    <a href="@routes.UserController.delete(user.id)" class="bg-yellow-700 hover:bg-yellow-900 text-white font-bold py-2 px-4 rounded">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
