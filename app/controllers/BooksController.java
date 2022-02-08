@@ -34,12 +34,16 @@ public class BooksController extends Controller {
     }
 
     public Result create(Http.Request request){
-        return ok(views.html.books.create.render(request));
+        Form<Book> bookForm = formFactory.form(Book.class);
+        return ok(views.html.books.create.render(request, bookForm));
     }
 
     public Result store(Http.Request request) {
-        Form<Book> form = formFactory.form(Book.class);
-        Book b = form.bindFromRequest(request).get();
+        Form<Book> form = formFactory.form(Book.class).bindFromRequest(request);
+        if(form.hasErrors()){
+            return badRequest(views.html.books.create.render(request,form));
+        }
+        Book b = form.get();
         book.save(b);
         return redirect(routes.BooksController.index()).flashing("success","Book has been added successfully!");
     }

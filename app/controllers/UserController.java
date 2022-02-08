@@ -30,7 +30,7 @@ public class UserController extends Controller {
     public Result store(Http.Request request){
         Form<User> userForm = formFactory.form(User.class).bindFromRequest(request);
         if(userForm.hasErrors()){
-           return badRequest(views.html.users.create.render(request, userForm)).flashing("error","Validation failed");
+           return badRequest(views.html.users.create.render(request, userForm));
         }
         User user = userForm.get();
         this.userService.save(user);
