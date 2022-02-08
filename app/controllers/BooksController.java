@@ -1,5 +1,6 @@
 package controllers;
 
+import actionMiddlewares.AuthMiddleware;
 import io.ebean.DB;
 import models.Book;
 import play.data.Form;
@@ -9,12 +10,12 @@ import play.mvc.*;
 import javax.inject.Inject;
 import java.util.List;
 
+
+@With(AuthMiddleware.class)
 public class BooksController extends Controller {
 
     @Inject
     FormFactory formFactory;
-
-
 
     public Result index(Http.Request request) {
         List<Book> books = DB.find(Book.class).findList();

@@ -1,5 +1,6 @@
 package controllers;
 
+import actionMiddlewares.AuthMiddleware;
 import io.ebean.DB;
 import models.User;
 import play.data.Form;
@@ -9,6 +10,7 @@ import play.mvc.*;
 import javax.inject.Inject;
 import java.util.List;
 
+@With(AuthMiddleware.class)
 public class UserController extends Controller {
 
     @Inject
