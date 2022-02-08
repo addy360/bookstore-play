@@ -48,8 +48,15 @@ public class AuthController extends Controller {
             return badRequest(views.html.auth.login.render(userObjForm,request));
         }
 
-        // TODO: create auth sessions
 
-        return redirect(routes.BooksController.index());
+        return redirect(routes.BooksController.index()).addingToSession(request,"uid",u.id.toString());
+    }
+
+    public Result logout(Http.Request request){
+
+        return  redirect(routes.AuthController.login())
+                .withSession(request
+                        .session()
+                        .removing("uid"));
     }
 }
