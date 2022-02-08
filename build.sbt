@@ -11,6 +11,8 @@ libraryDependencies += guice
 libraryDependencies += jdbc
 
 libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.27"
+libraryDependencies += "org.mindrot" % "jbcrypt" % "0.4"
+
 
 //libraryDependencies += "com.h2database" % "h2" % "2.1.210" % Test
 
