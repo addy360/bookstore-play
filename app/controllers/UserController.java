@@ -1,12 +1,15 @@
 package controllers;
 
+import io.ebean.DB;
 import models.User;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.*;
 
 import javax.inject.Inject;
+import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserController extends Controller {
     User userService;
@@ -18,7 +21,7 @@ public class UserController extends Controller {
     FormFactory formFactory;
 
     public Result index(Http.Request request){
-        ArrayList<User> users = this.userService.users;
+        List<User> users = DB.find(User.class).findList();
         return  ok(views.html.users.index.render(request, users));
     }
 
@@ -33,18 +36,18 @@ public class UserController extends Controller {
            return badRequest(views.html.users.create.render(request, userForm));
         }
         User user = userForm.get();
-        this.userService.save(user);
+        user.save();
 
         return redirect(routes.UserController.index()).flashing("success","user has been inserted successfully!");
     }
 
     public Result show(double id){
-        User user = this.userService.findById(id);
+        User user = DB.find(User.class,id);
         return ok(views.html.users.show.render(user));
     }
 
     public Result edit(double id, Http.Request request){
-        User user = this.userService.findById(id);
+        User user = DB.find(User.class, id);
         return ok(views.html.users.edit.render(user, request));
     }
 
@@ -57,7 +60,7 @@ public class UserController extends Controller {
     }
 
     public Result delete(double id){
-        this.userService.delete(id);
+        DB.delete(User.class, id);
 
         return redirect(routes.UserController.index());
     }

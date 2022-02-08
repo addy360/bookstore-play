@@ -1,5 +1,6 @@
 package controllers;
 
+import io.ebean.DB;
 import models.Book;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -8,6 +9,7 @@ import play.mvc.*;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BooksController extends Controller {
 
@@ -23,14 +25,14 @@ public class BooksController extends Controller {
     }
 
     public Result index(Http.Request request) {
-        ArrayList<Book> books = this.book.find();
+        List<Book> books = DB.find(Book.class).findList();
 
         return ok(views.html.books.index.render(books, request));
     }
 
     public Result show(Double bookId) {
-        Book b = this.book.findById(bookId);
-        return ok(views.html.books.show.render(b));
+        Book bk = DB.find(Book.class, bookId);
+        return ok(views.html.books.show.render(bk));
     }
 
     public Result create(Http.Request request){
@@ -44,32 +46,31 @@ public class BooksController extends Controller {
             return badRequest(views.html.books.create.render(request,form));
         }
         Book b = form.get();
-        book.save(b);
+        b.save();
         return redirect(routes.BooksController.index()).flashing("success","Book has been added successfully!");
     }
 
     public Result edit(Double bookId, Http.Request request) {
-        Book b = this.book.findById(bookId);
+        Book b = DB.find(Book.class, bookId);
         return ok(views.html.books.edit.render(b, request));
     }
 
     public Result update(Double bookId, Http.Request request) {
         DynamicForm updateForm = formFactory.form().bindFromRequest(request);
 
-        Book b = this.book.findById(bookId);
+        Book bk = DB.find(Book.class, bookId);
         String title = updateForm.get("title");
         String thumbnail = updateForm.get("thumbnail");
-        b.title = title;
-        b.thumbnail = thumbnail;
 
-        this.book.update(b);
+        bk.title = title;
+        bk.thumbnail = thumbnail;
+        DB.update(bk);
 
-        System.out.println(request.toString());
-        return redirect("/books").flashing("success","Book has been updated successfully!");
+        return redirect(routes.BooksController.index()).flashing("success","Book has been updated successfully!");
     }
 
     public Result delete(Double bookId) {
-        this.book.findByIdAndDelete(bookId);
-        return redirect("/books").flashing("success","Book has been deleted successfully!");
+        DB.delete(Book.class,bookId);
+        return redirect(routes.BooksController.index()).flashing("success","Book has been deleted successfully!");
     }
 }

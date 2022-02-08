@@ -38,15 +38,15 @@ public class Book extends Model {
         return books;
     }
 
-    public Book update(Book book){
-
-        for (Book b : this.books){
-            if(b.id == book.id){
-                this.books.set(this.books.indexOf(book),book);
-            }
-        }
-        return book;
-    }
+//    public Book update(Book book){
+//
+//        for (Book b : this.books){
+//            if(b.id == book.id){
+//                this.books.set(this.books.indexOf(book),book);
+//            }
+//        }
+//        return book;
+//    }
 
     public  Book findById(Double id){
         Book b = null;
@@ -65,9 +65,9 @@ public class Book extends Model {
        return books.removeIf(book -> book.id == id);
     }
 
-    public Book save(Book book){
-        book.id = Math.random() ;
-        books.add(book);
-        return book;
-    }
+//    public Book save(Book book){
+//        book.id = Math.random() ;
+//        books.add(book);
+//        return book;
+//    }
 }

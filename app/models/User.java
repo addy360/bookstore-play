@@ -34,11 +34,6 @@ public class User extends Model {
         this.password = password;
     }
 
-    public User save(User user){
-        user.id = new Random().nextDouble();
-        this.users.add(user);
-        return user;
-    }
 
     public User findById(double id){
         User user = null;

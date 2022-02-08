@@ -1,6 +1,6 @@
 @import play.mvc.Http.Request
 @import java.util
-@(request: Request, users : util.ArrayList[User])
+@(request: Request, users : util.List[User])
 
 @layout.main("all users"){
     <a class="px-4 py-2 mx-2 rounded border inline-block my-4" href="@routes.UserController.create">create</a>
