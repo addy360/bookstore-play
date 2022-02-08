@@ -7,15 +7,9 @@ import play.data.FormFactory;
 import play.mvc.*;
 
 import javax.inject.Inject;
-import javax.jws.soap.SOAPBinding;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserController extends Controller {
-    User userService;
-    public UserController(){
-        userService = new User();
-    }
 
     @Inject
     FormFactory formFactory;
@@ -47,21 +41,29 @@ public class UserController extends Controller {
     }
 
     public Result edit(double id, Http.Request request){
+        Form<User> userForm = formFactory.form(User.class);
         User user = DB.find(User.class, id);
-        return ok(views.html.users.edit.render(user, request));
+        return ok(views.html.users.edit.render(user, request, userForm));
     }
 
     public Result update( double id, Http.Request request){
-        User user = this.userService.findById(id);
+        User user = DB.find(User.class,id);
+        Form<User> userForm = formFactory.form(User.class).bindFromRequest(request);
+        if(userForm.hasErrors()){
+            return badRequest(views.html.users.edit.render(user,request,userForm));
+        }
         User u = formFactory.form(User.class).bindFromRequest(request).get();
-        this.userService.update(user.id, u);
+       user.fullname = u.fullname;
+       user.username = u.username;
+       user.password = u.password;
 
-        return redirect(routes.UserController.index());
+       user.update();
+
+        return redirect(routes.UserController.index()).flashing("success","user updated successfully");
     }
 
     public Result delete(double id){
         DB.delete(User.class, id);
-
         return redirect(routes.UserController.index());
     }
 }

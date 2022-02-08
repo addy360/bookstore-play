@@ -4,7 +4,7 @@
 
 @layout.main("all users"){
     <a class="px-4 py-2 mx-2 rounded border inline-block my-4" href="@routes.UserController.create">create</a>
-    @request2Flash(request).get("success")
+    @layout.success(request2Flash(request).get("success").orElse("all available users"))
     <h4>All users available in the system</h4>
     @if(users.length < 1){
         <div class=" mt-4 bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">

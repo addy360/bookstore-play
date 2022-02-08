@@ -1,6 +1,6 @@
 @import views.html.helper.CSRF
 @import play.mvc.Http.RequestHeader
-@(user:User, requestHeader: RequestHeader)
+@(user:User, requestHeader: RequestHeader, form:Form[User])
 @layout.main("create user") {
     <section class="py-5">
         <h3 class="text-xl font-bold mb-4">create user</h3>
@@ -9,16 +9,25 @@
             <div class="mb-4">
                 <label class="capitalize mb-2 block font-thin" >fullname</label>
                 <input class="outline-none block w-full border rounded py-2 px-3 " value="@user.fullname" type="text" name="fullname" placeholder="fullname" />
+                @if(form.error("fullname").isPresent){
+                    @utils.form_error(form.error("fullname").get().message().replace("error.",""))
+                }
             </div>
 
             <div class="mb-4">
                 <label class="capitalize mb-2 block font-thin" >username</label>
                 <input class="outline-none block w-full border rounded py-2 px-3 " value="@user.username" type="text" name="username" placeholder="username" />
+                @if(form.error("username").isPresent){
+                    @utils.form_error(form.error("username").get().message().replace("error.",""))
+                }
             </div>
 
             <div class="mb-4">
                 <label class="capitalize mb-2 block font-thin" >password</label>
                 <input class="outline-none block w-full border rounded py-2 px-3 " type="password" name="password" placeholder="password" />
+                @if(form.error("password").isPresent){
+                    @utils.form_error(form.error("password").get().message().replace("error.",""))
+                }
             </div>
 
             <button type="submit" class="px-4 py-2 rounded border" >Save</button>

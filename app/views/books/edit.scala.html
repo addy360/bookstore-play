@@ -1,6 +1,6 @@
 @import views.html.helper.CSRF
 @import play.mvc.Http.RequestHeader
-@(book:Book, requestHeader: RequestHeader)
+@(book:Book, requestHeader: RequestHeader, bookForm: Form[Book])
 @layout.main("edit book"){
 
     <section class="py-5">
@@ -10,11 +10,17 @@
             <div class="mb-4">
                 <label class="capitalize mb-2 block font-thin" >book title</label>
                 <input class="outline-none block w-full border rounded py-2 px-3 " type="text" name="title" value="@book.title" placeholder="book title" />
+                @if(bookForm.error("title").isPresent){
+                    @utils.form_error(bookForm.error("title").get().message().replace("error.",""))
+                }
             </div>
 
             <div class="mb-4">
                 <label class="capitalize mb-2 block font-thin" >book image url</label>
                 <input class="outline-none block w-full border rounded py-2 px-3 " type="text" name="thumbnail" value="@book.thumbnail" placeholder="thumbnail url" />
+                @if(bookForm.error("title").isPresent){
+                    @utils.form_error(bookForm.error("thumbnail").get().message().replace("error.",""))
+                }
             </div>
 
             <button type="submit" class="px-4 py-2 rounded border" >Save</button>
