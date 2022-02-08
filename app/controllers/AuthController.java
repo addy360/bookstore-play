@@ -55,8 +55,6 @@ public class AuthController extends Controller {
     public Result logout(Http.Request request){
 
         return  redirect(routes.AuthController.login())
-                .withSession(request
-                        .session()
-                        .removing("uid"));
+                .withNewSession();
     }
 }
