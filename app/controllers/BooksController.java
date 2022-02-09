@@ -19,9 +19,6 @@ public class BooksController extends Controller {
 
     public Result index(Http.Request request) {
         List<Book> books = DB.find(Book.class).findList();
-
-        System.out.print(request.session().data());
-
         return ok(views.html.books.index.render(books, request));
     }
 

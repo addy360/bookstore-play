@@ -1,5 +1,6 @@
 package controllers;
 
+import actionMiddlewares.LoginMiddleware;
 import io.ebean.DB;
 import models.User;
 import models.helper.UserObj;
@@ -9,6 +10,7 @@ import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+import play.mvc.With;
 
 
 import javax.inject.Inject;
@@ -19,6 +21,7 @@ public class AuthController extends Controller {
     @Inject
     FormFactory formFactory;
 
+    @With(LoginMiddleware.class)
     public Result login(Http.Request request){
         Form<UserObj> userObjForm = formFactory.form(UserObj.class);
         return ok(views.html.auth.login.render(userObjForm, request));

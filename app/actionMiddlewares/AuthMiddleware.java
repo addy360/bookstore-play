@@ -13,13 +13,12 @@ public class AuthMiddleware extends Action.Simple {
     public CompletionStage<Result> call(Http.Request req) {
         try{
             double userId = Double.parseDouble(req.session().get("uid").get()) ;
-            System.out.println(userId);
+            // TODO: might check if user is valid and session has not expired yet
             return delegate.call(req);
         }catch (Exception e){
             // TODO: pass intended route to redirect after success login
             return CompletableFuture.completedFuture(redirect(routes.AuthController.login()));
         }
-
 
     }
 }
