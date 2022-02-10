@@ -2,7 +2,9 @@ package controllers;
 
 import actionMiddlewares.AuthMiddleware;
 import io.ebean.DB;
+import io.ebean.Ebean;
 import models.Book;
+import models.User;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.*;
@@ -37,7 +39,10 @@ public class BooksController extends Controller {
         if(form.hasErrors()){
             return badRequest(views.html.books.create.render(request,form));
         }
+        double userId = Double.parseDouble(request.session().get("uid").get());
+        User user = DB.find(User.class,userId);
         Book b = form.get();
+        b.user = user;
         b.save();
         return redirect(routes.BooksController.index()).flashing("success","Book has been added successfully!");
     }

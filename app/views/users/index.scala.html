@@ -20,6 +20,7 @@
                         <th class="p-4 w-1/4">Index</th>
                         <th class="p-4 w-1/4">fullname</th>
                         <th class="p-4 w-1/4">username</th>
+                        <th class="p-4 w-1/4">books</th>
                     </tr>
                 </thead>
                 <tbody class="bg-grey-light flex flex-col items-center justify-between overflow-y-scroll w-full" style="height: 50vh;">
@@ -27,13 +28,14 @@
 
                 @for(user <- users){
                     <tr class="flex w-full  border-b-2">
-                        <td class="p-4 w-[33%]">
+                        <td class="p-4 w-1/4">
                             <a href="@routes.UserController.show(user.id)" >@user.id</a>
                         </td>
-                        <td class="p-4 w-[33%]"> @user.fullname</td>
-                        <td class="p-4 w-[33%]">
+                        <td class="p-4 w-1/4"> @user.fullname</td>
+                        <td class="p-4 w-1/4">
                             @user.username
                         </td>
+                        <td class="p-4 w-1/4"> @user.getBooks().size()</td>
                     </tr>
                 }
 

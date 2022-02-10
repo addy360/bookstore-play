@@ -24,6 +24,7 @@
                             <th class="p-4 w-1/4">Index</th>
                             <th class="p-4 w-1/4">Book title</th>
                             <th class="p-4 w-1/4">Book image</th>
+                            <th class="p-4 w-1/4" >Owner</th>
                         </tr>
                     </thead>
                     <tbody class="bg-grey-light flex flex-col items-center justify-between overflow-y-scroll w-full" style="height: 50vh;">
@@ -31,15 +32,16 @@
 
                         @for(book <- books){
                             <tr class="flex w-full  border-b-2">
-                                <td class="p-4 w-[33%]">
+                                <td class="p-4 w-1/4">
                                     <a href="@routes.BooksController.show(book.id)" >@book.id</a>
                                 </td>
-                                <td class="p-4 w-[33%]"> @book.title</td>
-                                <td class="p-4 w-[33%]">
+                                <td class="p-4 w-1/4"> @book.title</td>
+                                <td class="p-4 w-1/4">
                                     <div class="h-[5vw] rounded overflow-hidden" style="aspect-ratio: 1/1">
                                         <img src="@book.thumbnail" class="h-full w-full object-cover" >
                                     </div>
                                 </td>
+                                <td class="p-4 w-1/4"> @book.user.getUsername()</td>
                             </tr>
                         }
 
