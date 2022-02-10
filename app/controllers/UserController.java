@@ -6,6 +6,7 @@ import models.User;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.*;
+import services.UserService;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -16,9 +17,12 @@ public class UserController extends Controller {
     @Inject
     FormFactory formFactory;
 
+    @Inject
+    UserService userService;
+
     @With(AuthMiddleware.class)
     public Result index(Http.Request request){
-        List<User> users = DB.find(User.class).findList();
+        List<User> users = userService.getUsers();
         return  ok(views.html.users.index.render(request, users));
     }
 

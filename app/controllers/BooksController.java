@@ -2,7 +2,6 @@ package controllers;
 
 import actionMiddlewares.AuthMiddleware;
 import io.ebean.DB;
-import io.ebean.Ebean;
 import models.Book;
 import models.User;
 import play.data.Form;
