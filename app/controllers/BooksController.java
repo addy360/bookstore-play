@@ -7,9 +7,12 @@ import models.User;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.*;
+import services.JwtService;
 
 import javax.inject.Inject;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @With(AuthMiddleware.class)
@@ -18,7 +21,20 @@ public class BooksController extends Controller {
     @Inject
     FormFactory formFactory;
 
+    @Inject
+    JwtService jwtService;
+
     public Result index(Http.Request request) {
+
+        String token =  jwtService.generateJwt(new HashMap() {
+            {
+                put("data","jane dow");
+            }
+        });
+
+        System.out.println(token);
+
+        System.out.println(jwtService.verifyJwt(token).getClaims());
         List<Book> books = DB.find(Book.class).findList();
         return ok(views.html.books.index.render(books, request));
     }
