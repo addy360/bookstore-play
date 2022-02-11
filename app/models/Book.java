@@ -23,6 +23,7 @@ public class Book extends Model {
     @URL
     public String thumbnail;
 
+
     @ManyToOne
     public User user;
 

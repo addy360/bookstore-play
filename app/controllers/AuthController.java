@@ -1,12 +1,16 @@
 package controllers;
 
 import actionMiddlewares.LoginMiddleware;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.ebean.DB;
+import io.ebean.Ebean;
+import models.Book;
 import models.User;
 import models.helper.UserObj;
 import org.mindrot.jbcrypt.BCrypt;
 import play.data.Form;
 import play.data.FormFactory;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -59,5 +63,10 @@ public class AuthController extends Controller {
 
         return  redirect(routes.AuthController.login())
                 .withNewSession();
+    }
+
+    public Result getUsers (Http.Request request){
+        List<User> users = Ebean.find(User.class).fetch("books","id,title,thumbnail").findList();
+        return created(Ebean.json().toJson(users)).as("application/json");
     }
 }
